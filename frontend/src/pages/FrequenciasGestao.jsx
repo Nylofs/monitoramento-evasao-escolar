@@ -6,6 +6,8 @@ import FormularioFrequencia from "../components/FormularioFrequencia";
 
 import FormularioEdicaoFrequencia from "../components/FormularioEdicaoFrequencia";
 
+import ExclusaoFrequencia from "../components/ExclusaoFrequencia";
+
 // ============================================
 // GESTÃO DE FREQUÊNCIAS
 // ============================================
@@ -13,8 +15,7 @@ import FormularioEdicaoFrequencia from "../components/FormularioEdicaoFrequencia
 function FrequenciasGestao({ token }) {
     // ==========================================
     // MODO DO FORMULÁRIO
-    //
-    // null | cadastro | edicao
+    // null | cadastro | edicao | exclusao
     // ==========================================
 
     const [modoFormulario, setModoFormulario] = useState(null);
@@ -26,7 +27,7 @@ function FrequenciasGestao({ token }) {
     const [versaoLista, setVersaoLista] = useState(0);
 
     // ==========================================
-    // ALTERNAR FORMULÁRIO
+    // ABRIR OU FECHAR FORMULÁRIO
     // ==========================================
 
     function alterarModo(novoModo) {
@@ -36,7 +37,7 @@ function FrequenciasGestao({ token }) {
     }
 
     // ==========================================
-    // RECARREGAR LISTAGEM
+    // ATUALIZAR LISTAGEM
     // ==========================================
 
     function atualizarListagem() {
@@ -58,7 +59,8 @@ function FrequenciasGestao({ token }) {
                     <h2>Gestão de frequências</h2>
 
                     <p>
-                        Consulte, registre e atualize os lançamentos escolares.
+                        Consulte, registre, edite e exclua frequências conforme
+                        suas permissões.
                     </p>
                 </div>
 
@@ -68,9 +70,9 @@ function FrequenciasGestao({ token }) {
                     <button
                         type="button"
                         className="frequencias-gestao-botao"
-                        onClick={() => alterarModo("cadastro")}
                         aria-expanded={modoFormulario === "cadastro"}
                         aria-controls="frequencias-gestao-formulario"
+                        onClick={() => alterarModo("cadastro")}
                     >
                         {modoFormulario === "cadastro"
                             ? "Fechar cadastro"
@@ -85,25 +87,40 @@ function FrequenciasGestao({ token }) {
                             "frequencias-gestao-botao " +
                             "frequencias-gestao-botao--secundario"
                         }
-                        onClick={() => alterarModo("edicao")}
                         aria-expanded={modoFormulario === "edicao"}
                         aria-controls="frequencias-gestao-formulario"
+                        onClick={() => alterarModo("edicao")}
                     >
                         {modoFormulario === "edicao"
                             ? "Fechar edição"
                             : "Editar frequência"}
                     </button>
+
+                    {/* EXCLUSÃO */}
+
+                    <button
+                        type="button"
+                        className={
+                            "frequencias-gestao-botao " +
+                            "frequencias-gestao-botao--perigo"
+                        }
+                        aria-expanded={modoFormulario === "exclusao"}
+                        aria-controls="frequencias-gestao-formulario"
+                        onClick={() => alterarModo("exclusao")}
+                    >
+                        {modoFormulario === "exclusao"
+                            ? "Fechar exclusão"
+                            : "Excluir frequência"}
+                    </button>
                 </div>
             </section>
 
             {/* ======================================
-          ÁREA DOS FORMULÁRIOS
+          FORMULÁRIOS
       ====================================== */}
 
             {modoFormulario !== null && (
                 <div id="frequencias-gestao-formulario">
-                    {/* CADASTRO EXISTENTE */}
-
                     {modoFormulario === "cadastro" && (
                         <FormularioFrequencia
                             token={token}
@@ -111,12 +128,17 @@ function FrequenciasGestao({ token }) {
                         />
                     )}
 
-                    {/* NOVA EDIÇÃO */}
-
                     {modoFormulario === "edicao" && (
                         <FormularioEdicaoFrequencia
                             token={token}
                             onAtualizacaoRealizada={atualizarListagem}
+                        />
+                    )}
+
+                    {modoFormulario === "exclusao" && (
+                        <ExclusaoFrequencia
+                            token={token}
+                            onExclusaoRealizada={atualizarListagem}
                         />
                     )}
                 </div>

@@ -16,6 +16,7 @@ from app.services.frequencia_service import (
     listar_frequencias,
     buscar_frequencia,
     atualizar_frequencia,
+    excluir_frequencia,
     FrequenciaNaoEncontradaError,
     AlunoInvalidoFrequenciaError,
     FrequenciaPermissaoError,
@@ -64,7 +65,8 @@ def tratar_erro_frequencia(erro: Exception):
             detail=str(erro)
         ) from erro
 
-    # Exceções inesperadas não são ocultadas.
+    # Erros inesperados continuam visíveis
+    # no log do backend.
     raise erro
 
 
@@ -183,5 +185,36 @@ def atualizar_frequencia_controller(
         FrequenciaPermissaoError,
         FrequenciaConflitoError,
         FrequenciaDataInvalidaError
+    ) as erro:
+        tratar_erro_frequencia(erro)
+
+
+# ============================================
+# DELETE - EXCLUIR FREQUÊNCIA
+# ============================================
+
+def excluir_frequencia_controller(
+    frequencia_id: int,
+    db: Session,
+    usuario: Usuario
+) -> None:
+    """
+    Encaminha a solicitação de exclusão
+    ao Service e trata os erros de negócio.
+    """
+
+    try:
+        excluir_frequencia(
+            db=db,
+            frequencia_id=frequencia_id,
+            usuario=usuario
+        )
+
+        return None
+
+    except (
+        FrequenciaNaoEncontradaError,
+        FrequenciaPermissaoError,
+        FrequenciaConflitoError
     ) as erro:
         tratar_erro_frequencia(erro)

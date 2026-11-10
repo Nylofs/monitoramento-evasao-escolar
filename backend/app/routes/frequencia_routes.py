@@ -4,6 +4,7 @@ from fastapi import (
     Depends,
     Path,
     Query,
+    Response,
     status
 )
 
@@ -27,7 +28,8 @@ from app.controllers.frequencia_controller import (
     registrar_frequencia_controller,
     listar_frequencias_controller,
     buscar_frequencia_controller,
-    atualizar_frequencia_controller
+    atualizar_frequencia_controller,
+    excluir_frequencia_controller
 )
 
 
@@ -129,4 +131,31 @@ def atualizar_frequencia_route(
         dados=dados,
         db=db,
         usuario=usuario
+    )
+
+
+# ============================================
+# DELETE - EXCLUIR FREQUÊNCIA
+# ============================================
+
+@router.delete(
+    "/{frequencia_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    response_class=Response
+)
+def excluir_frequencia_route(
+    frequencia_id: int = Path(gt=0),
+    db: Session = Depends(get_db),
+    usuario: Usuario = Depends(obter_usuario_atual)
+):
+
+    excluir_frequencia_controller(
+        frequencia_id=frequencia_id,
+        db=db,
+        usuario=usuario
+    )
+
+    # HTTP 204: resposta sem conteúdo.
+    return Response(
+        status_code=status.HTTP_204_NO_CONTENT
     )

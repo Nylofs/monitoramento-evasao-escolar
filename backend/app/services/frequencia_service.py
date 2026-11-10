@@ -5,15 +5,20 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-# Importamos todos os Models relacionados
+# ============================================
+# MODELS
+# ============================================
+
 from app.models.escola_model import Escola
 from app.models.turma_model import Turma
 from app.models.aluno_model import Aluno
 from app.models.frequencia_model import Frequencia
-from app.models.intervencao_model import Intervencao
 from app.models.usuario_model import Usuario
 
-# Schemas Pydantic
+# ============================================
+# SCHEMAS PYDANTIC
+# ============================================
+
 from app.views.frequencia_view import (
     FrequenciaCreate,
     FrequenciaUpdate
@@ -50,8 +55,8 @@ class FrequenciaDataInvalidaError(Exception):
 
 def validar_usuario_ativo(usuario: Usuario):
     """
-    Verifica se a conta do usuário está ativa
-    e se possui um perfil reconhecido.
+    Verifica se o usuário está ativo e possui
+    um perfil reconhecido pelo sistema.
     """
 
     if not usuario.ativo:
@@ -73,7 +78,7 @@ def validar_usuario_ativo(usuario: Usuario):
 
 def exigir_administrador(usuario: Usuario):
     """
-    Restringe lançamentos e correções
+    Restringe operações de escrita
     ao administrador.
     """
 
@@ -86,7 +91,7 @@ def exigir_administrador(usuario: Usuario):
 
 
 # ============================================
-# VALIDAÇÃO DO ALUNO PARA LANÇAMENTO
+# VALIDAR ALUNO PARA LANÇAMENTO
 # ============================================
 
 def validar_aluno_para_registro(
@@ -94,9 +99,8 @@ def validar_aluno_para_registro(
     aluno_id: int
 ) -> Aluno:
     """
-    Verifica se o aluno existe e está ativo,
-    se sua turma está ativa e se sua escola
-    também está ativa.
+    Verifica se o aluno, a turma e a escola
+    existem e estão ativos.
     """
 
     aluno = db.get(
@@ -144,10 +148,11 @@ def validar_aluno_para_registro(
 # VALIDAÇÃO DA DATA
 # ============================================
 
-def validar_data_frequencia(data_frequencia: date):
+def validar_data_frequencia(
+    data_frequencia: date
+):
     """
-    Impede o lançamento de frequências
-    para datas futuras.
+    Impede registros para datas futuras.
     """
 
     if data_frequencia > date.today():
@@ -165,10 +170,8 @@ def consulta_frequencias_autorizadas(
     usuario: Usuario
 ):
     """
-    Monta uma consulta SQLAlchemy com as
-    restrições de acesso por escola.
-
-    A consulta ainda não é executada aqui.
+    Monta uma consulta respeitando
+    as restrições de acesso por escola.
     """
 
     validar_usuario_ativo(usuario)
@@ -210,20 +213,15 @@ def registrar_frequencia(
 
     exigir_administrador(usuario)
 
-    # Verifica a existência e a situação
-    # do aluno, da turma e da escola.
     validar_aluno_para_registro(
         db=db,
         aluno_id=dados.aluno_id
     )
 
-    # Impede datas futuras.
     validar_data_frequencia(
         dados.data
     )
 
-    # Procura registro do mesmo aluno
-    # para a mesma data.
     frequencia_existente = db.execute(
         select(Frequencia).where(
             Frequencia.aluno_id == dados.aluno_id,
@@ -237,7 +235,6 @@ def registrar_frequencia(
             "para esse aluno nessa data."
         )
 
-    # Cria o novo lançamento.
     nova_frequencia = Frequencia(
         aluno_id=dados.aluno_id,
         data=dados.data,
@@ -276,13 +273,11 @@ def listar_frequencias(
         usuario
     )
 
-    # Filtro opcional por aluno.
     if aluno_id is not None:
         consulta = consulta.where(
             Frequencia.aluno_id == aluno_id
         )
 
-    # Registros mais recentes primeiro.
     consulta = consulta.order_by(
         Frequencia.data.desc(),
         Frequencia.id.desc()
@@ -298,7 +293,7 @@ def listar_frequencias(
 
 
 # ============================================
-# READ - CONSULTAR FREQUÊNCIA POR ID
+# READ - BUSCAR FREQUÊNCIA POR ID
 # ============================================
 
 def buscar_frequencia(
@@ -338,29 +333,24 @@ def atualizar_frequencia(
 
     exigir_administrador(usuario)
 
-    # Procura o lançamento existente.
     frequencia = buscar_frequencia(
         db=db,
         frequencia_id=frequencia_id,
         usuario=usuario
     )
 
-    # Impede trocar o aluno do registro.
     if dados.aluno_id != frequencia.aluno_id:
         raise FrequenciaConflitoError(
             "Não é permitido alterar o aluno "
             "de um registro de frequência."
         )
 
-    # Impede trocar a data do registro.
     if dados.data != frequencia.data:
         raise FrequenciaConflitoError(
             "Não é permitido alterar a data "
             "de um registro de frequência."
         )
 
-    # Verifica a situação atual do aluno,
-    # da turma e da escola.
     validar_aluno_para_registro(
         db=db,
         aluno_id=frequencia.aluno_id
@@ -370,7 +360,6 @@ def atualizar_frequencia(
         frequencia.data
     )
 
-    # Atualiza apenas os campos permitidos.
     frequencia.situacao = dados.situacao
     frequencia.observacao = dados.observacao
 
@@ -386,3 +375,54 @@ def atualizar_frequencia(
         ) from erro
 
     return frequencia
+
+
+# ============================================
+# DELETE - EXCLUIR FREQUÊNCIA
+# ============================================
+
+def excluir_frequencia(
+    db: Session,
+    frequencia_id: int,
+    usuario: Usuario
+) -> None:
+    """
+    Exclui fisicamente um registro de frequência.
+
+    Regras:
+    - Somente administrador pode excluir.
+    - A frequência precisa existir e estar acessível.
+    - Uma violação de integridade cancela a operação.
+    """
+
+    # 1. Verifica autorização.
+    exigir_administrador(usuario)
+
+    # 2. Busca a frequência usando
+    # a consulta autorizada existente.
+    frequencia = buscar_frequencia(
+        db=db,
+        frequencia_id=frequencia_id,
+        usuario=usuario
+    )
+
+    # 3. Solicita a exclusão ao SQLAlchemy.
+    try:
+        db.delete(frequencia)
+
+        # 4. Confirma a transação.
+        db.commit()
+
+    except IntegrityError as erro:
+        # 5. Cancela a transação se o banco
+        # rejeitar a exclusão por integridade.
+        db.rollback()
+
+        raise FrequenciaConflitoError(
+            "Não foi possível excluir a frequência "
+            "devido a vínculos ou restrições "
+            "de integridade no banco de dados."
+        ) from erro
+
+    # Nenhum objeto precisa ser retornado.
+    return None

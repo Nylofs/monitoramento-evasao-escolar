@@ -7905,3 +7905,307 @@ p {
   }
 }
 
+/* ==========================================
+   BOTÃO DE EXCLUSÃO - FREQUÊNCIAS
+========================================== */
+
+.frequencias-gestao-botao--perigo {
+  background: #fff1f0;
+  color: #a43e3e;
+  border: 1px solid #efc8c4;
+}
+
+.frequencias-gestao-botao--perigo:hover {
+  background: #ffe5e2;
+}
+
+/* ==========================================
+   FORMULÁRIO DE EXCLUSÃO
+========================================== */
+
+.exclusao-frequencia {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 25px;
+  background: #ffffff;
+
+  border: 1px solid #e4e8ef;
+  border-radius: 14px;
+}
+
+.exclusao-frequencia-topo h2 {
+  margin: 0 0 9px;
+  color: #a43e3e;
+  font-size: 21px;
+}
+
+.exclusao-frequencia-topo p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   AVISO DE SEGURANÇA
+========================================== */
+
+.exclusao-frequencia-aviso {
+  padding: 18px;
+  background: #fff1f0;
+
+  border-left: 4px solid #c15757;
+  border-radius: 10px;
+}
+
+.exclusao-frequencia-aviso strong {
+  color: #973737;
+  font-size: 14px;
+}
+
+.exclusao-frequencia-aviso p {
+  margin: 9px 0 0;
+  color: #8e4141;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   SELETOR
+========================================== */
+
+.exclusao-frequencia-selecao {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.exclusao-frequencia-selecao label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.exclusao-frequencia-selecao select {
+  width: 100%;
+  max-width: 760px;
+  min-height: 44px;
+
+  padding: 10px 12px;
+
+  background: #ffffff;
+  color: #17253a;
+
+  border: 1px solid #d8e0eb;
+  border-radius: 9px;
+
+  font: inherit;
+  font-size: 13px;
+}
+
+.exclusao-frequencia-selecao select:focus {
+  outline: 2px solid #c15757;
+  outline-offset: 1px;
+}
+
+/* ==========================================
+   DADOS DO REGISTRO
+========================================== */
+
+.exclusao-frequencia-dados {
+  margin-top: 4px;
+  padding: 20px;
+
+  background: #f5f7fb;
+  border: 1px solid #e4e8ef;
+  border-radius: 11px;
+}
+
+.exclusao-frequencia-dados h3 {
+  margin: 0 0 18px;
+  color: #173966;
+  font-size: 17px;
+}
+
+.exclusao-frequencia-dados dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+}
+
+.exclusao-frequencia-dados dl > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.exclusao-frequencia-dados dt {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.exclusao-frequencia-dados dd {
+  margin: 0;
+  color: #17253a;
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   CONFIRMAÇÃO
+========================================== */
+
+.exclusao-frequencia-confirmacao {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.exclusao-frequencia-confirmacao label {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.exclusao-frequencia-confirmacao strong {
+  display: block;
+  padding: 13px 15px;
+
+  background: #fff5dd;
+  color: #946518;
+
+  border-radius: 9px;
+  font-size: 15px;
+}
+
+.exclusao-frequencia-confirmacao input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+
+  background: #ffffff;
+  color: #17253a;
+
+  border: 1px solid #d8e0eb;
+  border-radius: 9px;
+
+  font: inherit;
+}
+
+.exclusao-frequencia-confirmacao input:focus {
+  outline: 2px solid #c15757;
+  outline-offset: 1px;
+}
+
+.exclusao-frequencia-confirmacao p {
+  margin: 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* ==========================================
+   BOTÕES
+========================================== */
+
+.exclusao-frequencia-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.exclusao-frequencia-botao-excluir,
+.exclusao-frequencia-botao-secundario {
+  padding: 12px 18px;
+
+  border-radius: 9px;
+
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.exclusao-frequencia-botao-excluir {
+  background: #b74242;
+  color: #ffffff;
+  border: 1px solid #b74242;
+}
+
+.exclusao-frequencia-botao-excluir:hover:not(:disabled) {
+  background: #973737;
+}
+
+.exclusao-frequencia-botao-secundario {
+  background: #edf3fb;
+  color: #2563a6;
+  border: 1px solid #d6e3f3;
+}
+
+.exclusao-frequencia-botao-secundario:hover:not(:disabled) {
+  background: #dceafb;
+}
+
+.exclusao-frequencia-botao-excluir:disabled,
+.exclusao-frequencia-botao-secundario:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   MENSAGENS
+========================================== */
+
+.exclusao-frequencia-mensagem,
+.exclusao-frequencia-orientacao {
+  margin: 0;
+  padding: 16px 18px;
+
+  background: #eef4fc;
+  color: #23466d;
+
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.exclusao-frequencia-mensagem--erro {
+  background: #fff1f0;
+  color: #973737;
+  border-left: 4px solid #c15757;
+}
+
+.exclusao-frequencia-mensagem--sucesso {
+  background: #e4f5ed;
+  color: #18704c;
+  border-left: 4px solid #16816a;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 650px) {
+  .exclusao-frequencia {
+    padding: 20px;
+  }
+
+  .exclusao-frequencia-dados dl {
+    grid-template-columns: 1fr;
+  }
+
+  .exclusao-frequencia-acoes {
+    flex-direction: column;
+  }
+
+  .exclusao-frequencia-acoes button {
+    width: 100%;
+  }
+}
