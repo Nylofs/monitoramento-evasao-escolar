@@ -7614,3 +7614,294 @@ p {
     width: 100%;
   }
 }
+
+
+/* ==========================================
+   GESTÃO DE FREQUÊNCIAS - BOTÕES
+========================================== */
+
+.frequencias-gestao-botoes {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.frequencias-gestao-botao--secundario {
+  background: #edf3fb;
+  color: #173966;
+  border: 1px solid #d6e3f3;
+}
+
+.frequencias-gestao-botao--secundario:hover {
+  background: #dceafb;
+}
+
+/* ==========================================
+   FORMULÁRIO DE EDIÇÃO
+========================================== */
+
+.edicao-frequencia {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 25px;
+
+  background: #ffffff;
+  border: 1px solid #e4e8ef;
+  border-radius: 14px;
+}
+
+.edicao-frequencia-topo h2 {
+  margin: 0 0 9px;
+  color: #173966;
+  font-size: 21px;
+}
+
+.edicao-frequencia-topo p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   SELEÇÃO DO REGISTRO
+========================================== */
+
+.edicao-frequencia-selecao {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.edicao-frequencia-selecao label,
+.edicao-frequencia-campo label {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.edicao-frequencia-selecao select,
+.edicao-frequencia-campo input,
+.edicao-frequencia-campo select,
+.edicao-frequencia-campo textarea {
+  width: 100%;
+  min-width: 0;
+
+  padding: 10px 12px;
+
+  background: #ffffff;
+  color: #17253a;
+
+  border: 1px solid #d8e0eb;
+  border-radius: 9px;
+
+  font: inherit;
+  font-size: 13px;
+}
+
+.edicao-frequencia-selecao select,
+.edicao-frequencia-campo input,
+.edicao-frequencia-campo select {
+  min-height: 44px;
+}
+
+.edicao-frequencia-selecao small,
+.edicao-frequencia-campo small {
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.edicao-frequencia-selecao select:focus,
+.edicao-frequencia-campo input:focus,
+.edicao-frequencia-campo select:focus,
+.edicao-frequencia-campo textarea:focus {
+  outline: 2px solid #2563a6;
+  outline-offset: 1px;
+}
+
+/* ==========================================
+   IDENTIFICAÇÃO
+========================================== */
+
+.edicao-frequencia-identificacao {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  padding: 16px;
+  margin-bottom: 22px;
+
+  background: #f5f7fb;
+  border-radius: 10px;
+}
+
+.edicao-frequencia-identificacao strong {
+  color: #173966;
+  font-size: 15px;
+}
+
+.edicao-frequencia-identificacao span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* ==========================================
+   CAMPOS
+========================================== */
+
+.edicao-frequencia-campos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.edicao-frequencia-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.edicao-frequencia-campo input:read-only {
+  background: #f5f7fb;
+  color: #64748b;
+}
+
+.edicao-frequencia-campo textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.edicao-frequencia-observacao {
+  margin-top: 22px;
+}
+
+/* ==========================================
+   AÇÕES
+========================================== */
+
+.edicao-frequencia-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.edicao-frequencia-botao-salvar,
+.edicao-frequencia-botao-secundario {
+  padding: 12px 18px;
+
+  border-radius: 9px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.edicao-frequencia-botao-salvar {
+  background: #173966;
+  color: #ffffff;
+  border: 1px solid #173966;
+}
+
+.edicao-frequencia-botao-salvar:hover:not(:disabled) {
+  background: #22548c;
+}
+
+.edicao-frequencia-botao-secundario {
+  background: #edf3fb;
+  color: #2563a6;
+  border: 1px solid #d6e3f3;
+}
+
+.edicao-frequencia-botao-secundario:hover:not(:disabled) {
+  background: #dceafb;
+}
+
+.edicao-frequencia-botao-salvar:disabled,
+.edicao-frequencia-botao-secundario:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   MENSAGENS
+========================================== */
+
+.edicao-frequencia-mensagem,
+.edicao-frequencia-orientacao {
+  margin: 0;
+  padding: 16px 18px;
+
+  background: #eef4fc;
+  color: #23466d;
+
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.edicao-frequencia-mensagem--erro {
+  background: #fff1f0;
+  color: #973737;
+  border-left: 4px solid #c15757;
+}
+
+.edicao-frequencia-mensagem--sucesso {
+  margin-top: 20px;
+  background: #e4f5ed;
+  color: #18704c;
+  border-left: 4px solid #16816a;
+}
+
+.edicao-frequencia-observacao-final {
+  margin: 22px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 900px) {
+  .edicao-frequencia-campos {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .frequencias-gestao-botoes {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .frequencias-gestao-botoes button {
+    width: 100%;
+  }
+
+  .edicao-frequencia {
+    padding: 20px;
+  }
+
+  .edicao-frequencia-campos {
+    grid-template-columns: 1fr;
+  }
+
+  .edicao-frequencia-acoes {
+    flex-direction: column;
+  }
+
+  .edicao-frequencia-acoes button {
+    width: 100%;
+  }
+}
+

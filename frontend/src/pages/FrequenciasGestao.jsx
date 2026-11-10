@@ -4,36 +4,42 @@ import Frequencias from "./Frequencias";
 
 import FormularioFrequencia from "../components/FormularioFrequencia";
 
+import FormularioEdicaoFrequencia from "../components/FormularioEdicaoFrequencia";
+
 // ============================================
-// PÁGINA DE GESTÃO DE FREQUÊNCIAS
+// GESTÃO DE FREQUÊNCIAS
 // ============================================
 
 function FrequenciasGestao({ token }) {
     // ==========================================
-    // MOSTRAR FORMULÁRIO
+    // MODO DO FORMULÁRIO
+    //
+    // null | cadastro | edicao
     // ==========================================
 
-    const [mostrarFormulario, setMostrarFormulario] = useState(false);
+    const [modoFormulario, setModoFormulario] = useState(null);
 
     // ==========================================
-    // VERSÃO DA LISTAGEM
+    // CONTROLE DA LISTAGEM
     // ==========================================
 
     const [versaoLista, setVersaoLista] = useState(0);
 
     // ==========================================
-    // ABRIR / FECHAR FORMULÁRIO
+    // ALTERNAR FORMULÁRIO
     // ==========================================
 
-    function alternarFormulario() {
-        setMostrarFormulario((anterior) => !anterior);
+    function alterarModo(novoModo) {
+        setModoFormulario((anterior) =>
+            anterior === novoModo ? null : novoModo,
+        );
     }
 
     // ==========================================
-    // CADASTRO CONFIRMADO
+    // RECARREGAR LISTAGEM
     // ==========================================
 
-    function cadastroRealizado() {
+    function atualizarListagem() {
         setVersaoLista((anterior) => anterior + 1);
     }
 
@@ -52,39 +58,72 @@ function FrequenciasGestao({ token }) {
                     <h2>Gestão de frequências</h2>
 
                     <p>
-                        Consulte presenças e ausências e registre novas
-                        frequências escolares.
+                        Consulte, registre e atualize os lançamentos escolares.
                     </p>
                 </div>
 
-                <button
-                    type="button"
-                    className="frequencias-gestao-botao"
-                    onClick={alternarFormulario}
-                    aria-expanded={mostrarFormulario}
-                    aria-controls="frequencias-gestao-formulario"
-                >
-                    {mostrarFormulario
-                        ? "Fechar cadastro"
-                        : "+ Registrar frequência"}
-                </button>
+                <div className="frequencias-gestao-botoes">
+                    {/* CADASTRO */}
+
+                    <button
+                        type="button"
+                        className="frequencias-gestao-botao"
+                        onClick={() => alterarModo("cadastro")}
+                        aria-expanded={modoFormulario === "cadastro"}
+                        aria-controls="frequencias-gestao-formulario"
+                    >
+                        {modoFormulario === "cadastro"
+                            ? "Fechar cadastro"
+                            : "+ Registrar frequência"}
+                    </button>
+
+                    {/* EDIÇÃO */}
+
+                    <button
+                        type="button"
+                        className={
+                            "frequencias-gestao-botao " +
+                            "frequencias-gestao-botao--secundario"
+                        }
+                        onClick={() => alterarModo("edicao")}
+                        aria-expanded={modoFormulario === "edicao"}
+                        aria-controls="frequencias-gestao-formulario"
+                    >
+                        {modoFormulario === "edicao"
+                            ? "Fechar edição"
+                            : "Editar frequência"}
+                    </button>
+                </div>
             </section>
 
             {/* ======================================
-          FORMULÁRIO
+          ÁREA DOS FORMULÁRIOS
       ====================================== */}
 
-            {mostrarFormulario && (
+            {modoFormulario !== null && (
                 <div id="frequencias-gestao-formulario">
-                    <FormularioFrequencia
-                        token={token}
-                        onCadastroRealizado={cadastroRealizado}
-                    />
+                    {/* CADASTRO EXISTENTE */}
+
+                    {modoFormulario === "cadastro" && (
+                        <FormularioFrequencia
+                            token={token}
+                            onCadastroRealizado={atualizarListagem}
+                        />
+                    )}
+
+                    {/* NOVA EDIÇÃO */}
+
+                    {modoFormulario === "edicao" && (
+                        <FormularioEdicaoFrequencia
+                            token={token}
+                            onAtualizacaoRealizada={atualizarListagem}
+                        />
+                    )}
                 </div>
             )}
 
             {/* ======================================
-          LISTAGEM EXISTENTE
+          LISTAGEM ORIGINAL
       ====================================== */}
 
             <Frequencias key={versaoLista} token={token} />
