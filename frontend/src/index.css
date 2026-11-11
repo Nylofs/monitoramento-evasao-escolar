@@ -9116,3 +9116,398 @@ p {
     width: 100%;
   }
 }
+
+
+/* ==========================================
+   ETAPA 15 - PARTE 31
+   GESTÃO E TRIAGEM DE ALERTAS
+========================================== */
+
+.alertas-gestao {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.alertas-gestao-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 22px;
+
+  background: #ffffff;
+  border: 1px solid #e4e8ef;
+  border-radius: 14px;
+}
+
+.alertas-gestao-topo h2 {
+  margin: 0 0 8px;
+  color: #173966;
+  font-size: 23px;
+}
+
+.alertas-gestao-topo p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.alertas-gestao-botoes {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.alertas-gestao-botao {
+  padding: 12px 16px;
+
+  background: #edf3fb;
+  color: #173966;
+
+  border: 1px solid #d6e3f3;
+  border-radius: 9px;
+
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.alertas-gestao-botao--ativo {
+  background: #173966;
+  color: #ffffff;
+  border-color: #173966;
+}
+
+/* ==========================================
+   PAINEL
+========================================== */
+
+.triagem-alertas {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  padding: 25px;
+
+  background: #ffffff;
+  border: 1px solid #e4e8ef;
+  border-radius: 14px;
+}
+
+.triagem-alertas-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.triagem-alertas-topo h2 {
+  margin: 0 0 8px;
+  color: #173966;
+  font-size: 21px;
+}
+
+.triagem-alertas-topo p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.triagem-alertas-botao,
+.triagem-alertas-botao-secundario {
+  padding: 11px 16px;
+
+  border-radius: 9px;
+
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.triagem-alertas-botao {
+  background: #173966;
+  color: #ffffff;
+  border: 1px solid #173966;
+}
+
+.triagem-alertas-botao-secundario {
+  background: #edf3fb;
+  color: #2563a6;
+  border: 1px solid #d6e3f3;
+}
+
+.triagem-alertas-botao:disabled,
+.triagem-alertas-botao-secundario:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   RESUMO
+========================================== */
+
+.triagem-alertas-resumo {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.triagem-alertas-resumo > div {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  padding: 18px;
+
+  background: #f5f7fb;
+  border: 1px solid #e4e8ef;
+  border-radius: 11px;
+}
+
+.triagem-alertas-resumo span {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.triagem-alertas-resumo strong {
+  color: #173966;
+  font-size: 26px;
+}
+
+/* ==========================================
+   FILTROS
+========================================== */
+
+.triagem-alertas-filtros {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+  gap: 14px;
+}
+
+.triagem-alertas-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.triagem-alertas-campo label {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.triagem-alertas-campo input,
+.triagem-alertas-campo select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+
+  padding: 10px 12px;
+
+  background: #ffffff;
+  color: #17253a;
+
+  border: 1px solid #d8e0eb;
+  border-radius: 9px;
+
+  font: inherit;
+  font-size: 13px;
+}
+
+.triagem-alertas-filtros button {
+  min-height: 44px;
+}
+
+/* ==========================================
+   LISTA
+========================================== */
+
+.triagem-alertas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.triagem-alertas-lista h3 {
+  margin: 0 0 5px;
+  color: #173966;
+  font-size: 17px;
+}
+
+.triagem-alertas-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+
+  width: 100%;
+  padding: 16px;
+
+  background: #ffffff;
+  border: 1px solid #d8e0eb;
+  border-radius: 10px;
+
+  color: #17253a;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.triagem-alertas-item:hover {
+  background: #f5f8fd;
+}
+
+.triagem-alertas-item--ativo {
+  border-color: #2563a6;
+  background: #eef4fc;
+}
+
+.triagem-alertas-item strong {
+  color: #173966;
+  font-size: 14px;
+}
+
+.triagem-alertas-item span {
+  font-size: 13px;
+}
+
+.triagem-alertas-item small {
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* ==========================================
+   DETALHES
+========================================== */
+
+.triagem-alertas-detalhes {
+  padding: 20px;
+
+  background: #f5f7fb;
+  border: 1px solid #e4e8ef;
+  border-radius: 11px;
+}
+
+.triagem-alertas-detalhes-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.triagem-alertas-detalhes h3 {
+  margin: 0 0 7px;
+  color: #173966;
+  font-size: 17px;
+}
+
+.triagem-alertas-detalhes-topo p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.triagem-alertas-detalhes dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+}
+
+.triagem-alertas-detalhes dl > div {
+  min-width: 0;
+}
+
+.triagem-alertas-detalhes dt {
+  color: #64748b;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.triagem-alertas-detalhes dd {
+  margin: 0;
+
+  color: #17253a;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+
+  overflow-wrap: anywhere;
+}
+
+.triagem-alertas-nota {
+  margin: 22px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   MENSAGENS
+========================================== */
+
+.triagem-alertas-mensagem,
+.triagem-alertas-vazio {
+  margin: 0;
+  padding: 16px 18px;
+
+  background: #eef4fc;
+  color: #23466d;
+
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.triagem-alertas-mensagem--erro {
+  background: #fff1f0;
+  color: #973737;
+  border-left: 4px solid #c15757;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 900px) {
+  .triagem-alertas-filtros {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .alertas-gestao-topo,
+  .triagem-alertas-topo,
+  .triagem-alertas-detalhes-topo {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .alertas-gestao-botoes {
+    flex-direction: column;
+  }
+
+  .triagem-alertas {
+    padding: 20px;
+  }
+
+  .triagem-alertas-resumo,
+  .triagem-alertas-filtros,
+  .triagem-alertas-detalhes dl {
+    grid-template-columns: 1fr;
+  }
+
+  .triagem-alertas-topo button,
+  .alertas-gestao-botoes button {
+    width: 100%;
+  }
+}

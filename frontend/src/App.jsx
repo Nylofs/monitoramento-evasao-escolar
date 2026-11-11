@@ -1,18 +1,59 @@
 import { useState } from "react";
 
+// ============================================
+// PÁGINAS PRINCIPAIS
+// ============================================
+
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 
+// ============================================
+// GESTÃO DE ESCOLAS
+// ============================================
+
 import EscolasGestao from "./pages/EscolasGestao";
+
+// ============================================
+// GESTÃO DE TURMAS
+// ============================================
+
 import TurmasGestao from "./pages/TurmasGestao";
+
+// ============================================
+// GESTÃO DE ALUNOS
+// ============================================
+
 import AlunosGestao from "./pages/AlunosGestao";
+
+// ============================================
+// GESTÃO DE FREQUÊNCIAS
+// ============================================
+
 import FrequenciasGestao from "./pages/FrequenciasGestao";
 
+// ============================================
+// INDICADORES
+// ============================================
+
 import Indicadores from "./pages/Indicadores";
-import Alertas from "./pages/Alertas";
+
+// ============================================
+// GESTÃO DE ALERTAS
+// ETAPA 15 - PARTE 31
+// ============================================
+
+import AlertasGestao from "./pages/AlertasGestao";
+
+// ============================================
+// GESTÃO DE INTERVENÇÕES
+// ============================================
 
 import IntervencoesGestao from "./pages/IntervencoesGestao";
+
+// ============================================
+// COMPONENTES DE ESTRUTURA
+// ============================================
 
 import Modulo from "./pages/Modulo";
 import MainLayout from "./components/MainLayout";
@@ -23,13 +64,15 @@ import MainLayout from "./components/MainLayout";
 
 function App() {
     // ==========================================
-    // SESSÃO EM MEMÓRIA
+    // CONTROLE DE SESSÃO
+    //
+    // O token permanece na memória do React.
     // ==========================================
 
     const [sessao, setSessao] = useState(null);
 
     // ==========================================
-    // NAVEGAÇÃO
+    // CONTROLE DE NAVEGAÇÃO
     // ==========================================
 
     const [paginaAtual, setPaginaAtual] = useState("inicio");
@@ -53,11 +96,12 @@ function App() {
 
     function sair() {
         setSessao(null);
+
         setPaginaAtual("inicio");
     }
 
     // ==========================================
-    // NAVEGAR
+    // NAVEGAÇÃO ENTRE MÓDULOS
     // ==========================================
 
     function navegar(idPagina) {
@@ -65,7 +109,7 @@ function App() {
     }
 
     // ==========================================
-    // LOGIN NÃO REALIZADO
+    // VERIFICAR AUTENTICAÇÃO
     // ==========================================
 
     if (!sessao) {
@@ -73,29 +117,74 @@ function App() {
     }
 
     // ==========================================
-    // CONTEÚDO AUTENTICADO
+    // DEFINIR CONTEÚDO DA PÁGINA
     // ==========================================
 
     let conteudo;
 
+    // ==========================================
+    // INÍCIO
+    // ==========================================
+
     if (paginaAtual === "inicio") {
         conteudo = <Home matricula={sessao.matricula} onNavegar={navegar} />;
+
+        // ==========================================
+        // DASHBOARD
+        // ==========================================
     } else if (paginaAtual === "dashboard") {
         conteudo = <Dashboard token={sessao.accessToken} />;
+
+        // ==========================================
+        // ESCOLAS
+        // ==========================================
     } else if (paginaAtual === "escolas") {
         conteudo = <EscolasGestao token={sessao.accessToken} />;
+
+        // ==========================================
+        // TURMAS
+        // ==========================================
     } else if (paginaAtual === "turmas") {
         conteudo = <TurmasGestao token={sessao.accessToken} />;
+
+        // ==========================================
+        // ALUNOS
+        // ==========================================
     } else if (paginaAtual === "alunos") {
         conteudo = <AlunosGestao token={sessao.accessToken} />;
+
+        // ==========================================
+        // FREQUÊNCIAS
+        // ==========================================
     } else if (paginaAtual === "frequencias") {
         conteudo = <FrequenciasGestao token={sessao.accessToken} />;
+
+        // ==========================================
+        // INDICADORES
+        // ==========================================
     } else if (paginaAtual === "indicadores") {
         conteudo = <Indicadores token={sessao.accessToken} />;
+
+        // ==========================================
+        // ALERTAS
+        // ETAPA 15 - PARTE 31
+        //
+        // O NOVO COMPONENTE REÚNE:
+        // - Painel de triagem
+        // - Consulta original de alertas
+        // ==========================================
     } else if (paginaAtual === "alertas") {
-        conteudo = <Alertas token={sessao.accessToken} />;
+        conteudo = <AlertasGestao token={sessao.accessToken} />;
+
+        // ==========================================
+        // INTERVENÇÕES
+        // ==========================================
     } else if (paginaAtual === "intervencoes") {
         conteudo = <IntervencoesGestao token={sessao.accessToken} />;
+
+        // ==========================================
+        // PÁGINA NÃO RECONHECIDA
+        // ==========================================
     } else {
         conteudo = (
             <Modulo
@@ -106,7 +195,7 @@ function App() {
     }
 
     // ==========================================
-    // LAYOUT PRINCIPAL
+    // LAYOUT AUTENTICADO
     // ==========================================
 
     return (
@@ -120,6 +209,10 @@ function App() {
         </MainLayout>
     );
 }
+
+// ============================================
+// EXPORTAÇÃO
+// ============================================
 
 export default App;
 
