@@ -8475,3 +8475,323 @@ p {
     width: 100%;
   }
 }
+
+
+/* ==========================================
+   ETAPA 15 - PARTE 29
+   GESTÃO DE INTERVENÇÕES
+========================================== */
+
+.intervencoes-gestao-botoes {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ==========================================
+   BOTÃO SECUNDÁRIO - EDIÇÃO
+========================================== */
+
+.intervencoes-gestao-botao--secundario {
+  background: #edf3fb;
+  color: #173966;
+  border: 1px solid #d6e3f3;
+}
+
+.intervencoes-gestao-botao--secundario:hover {
+  background: #dceafb;
+}
+
+/* ==========================================
+   FORMULÁRIO DE EDIÇÃO
+========================================== */
+
+.edicao-intervencao {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 25px;
+  background: #ffffff;
+
+  border: 1px solid #e4e8ef;
+  border-radius: 14px;
+}
+
+.edicao-intervencao-topo h2 {
+  margin: 0 0 9px;
+  color: #173966;
+  font-size: 21px;
+}
+
+.edicao-intervencao-topo p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   SELEÇÃO DO REGISTRO
+========================================== */
+
+.edicao-intervencao-selecao {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.edicao-intervencao-selecao label {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.edicao-intervencao-selecao select {
+  width: 100%;
+  min-height: 44px;
+  min-width: 0;
+
+  padding: 10px 12px;
+
+  background: #ffffff;
+  color: #17253a;
+
+  border: 1px solid #d8e0eb;
+  border-radius: 9px;
+
+  font: inherit;
+  font-size: 13px;
+}
+
+.edicao-intervencao-selecao small {
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   IDENTIFICAÇÃO DO REGISTRO
+========================================== */
+
+.edicao-intervencao-identificacao {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  padding: 16px;
+  margin-bottom: 22px;
+
+  background: #f5f7fb;
+  border-radius: 10px;
+}
+
+.edicao-intervencao-identificacao strong {
+  color: #173966;
+  font-size: 15px;
+}
+
+.edicao-intervencao-identificacao span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* ==========================================
+   CAMPOS
+========================================== */
+
+.edicao-intervencao-campos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.edicao-intervencao-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.edicao-intervencao-campo label {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.edicao-intervencao-campo input,
+.edicao-intervencao-campo select,
+.edicao-intervencao-campo textarea {
+  width: 100%;
+  min-width: 0;
+
+  padding: 10px 12px;
+
+  color: #17253a;
+  background: #ffffff;
+
+  border: 1px solid #d8e0eb;
+  border-radius: 9px;
+
+  font: inherit;
+  font-size: 13px;
+}
+
+.edicao-intervencao-campo input,
+.edicao-intervencao-campo select {
+  min-height: 44px;
+}
+
+.edicao-intervencao-campo textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.edicao-intervencao-campo input:focus,
+.edicao-intervencao-campo select:focus,
+.edicao-intervencao-campo textarea:focus,
+.edicao-intervencao-selecao select:focus {
+  outline: 2px solid #2563a6;
+  outline-offset: 1px;
+}
+
+.edicao-intervencao-campo input:read-only {
+  background: #f5f7fb;
+  color: #64748b;
+}
+
+.edicao-intervencao-campo small {
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   DESCRIÇÃO E RESULTADO
+========================================== */
+
+.edicao-intervencao-texto {
+  margin-top: 22px;
+}
+
+/* ==========================================
+   BOTÕES
+========================================== */
+
+.edicao-intervencao-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.edicao-intervencao-botao-salvar,
+.edicao-intervencao-botao-secundario {
+  padding: 12px 18px;
+
+  border-radius: 9px;
+
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.edicao-intervencao-botao-salvar {
+  background: #173966;
+  color: #ffffff;
+  border: 1px solid #173966;
+}
+
+.edicao-intervencao-botao-salvar:hover:not(:disabled) {
+  background: #22548c;
+}
+
+.edicao-intervencao-botao-secundario {
+  background: #edf3fb;
+  color: #2563a6;
+  border: 1px solid #d6e3f3;
+}
+
+.edicao-intervencao-botao-secundario:hover:not(:disabled) {
+  background: #dceafb;
+}
+
+.edicao-intervencao-botao-salvar:disabled,
+.edicao-intervencao-botao-secundario:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   MENSAGENS
+========================================== */
+
+.edicao-intervencao-mensagem,
+.edicao-intervencao-orientacao {
+  margin: 0;
+  padding: 16px 18px;
+
+  background: #eef4fc;
+  color: #23466d;
+
+  border-radius: 10px;
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.edicao-intervencao-mensagem--erro {
+  background: #fff1f0;
+  color: #973737;
+  border-left: 4px solid #c15757;
+}
+
+.edicao-intervencao-mensagem--sucesso {
+  margin-top: 20px;
+  background: #e4f5ed;
+  color: #18704c;
+  border-left: 4px solid #16816a;
+}
+
+.edicao-intervencao-observacao {
+  margin: 22px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 650px) {
+  .intervencoes-gestao-botoes {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .intervencoes-gestao-botoes button {
+    width: 100%;
+  }
+
+  .edicao-intervencao {
+    padding: 20px;
+  }
+
+  .edicao-intervencao-campos {
+    grid-template-columns: 1fr;
+  }
+
+  .edicao-intervencao-acoes {
+    flex-direction: column;
+  }
+
+  .edicao-intervencao-acoes button {
+    width: 100%;
+  }
+}
