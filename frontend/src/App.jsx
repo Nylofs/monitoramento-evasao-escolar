@@ -7,14 +7,14 @@ import Dashboard from "./pages/Dashboard";
 import EscolasGestao from "./pages/EscolasGestao";
 import TurmasGestao from "./pages/TurmasGestao";
 import AlunosGestao from "./pages/AlunosGestao";
-
 import FrequenciasGestao from "./pages/FrequenciasGestao";
 
 import Indicadores from "./pages/Indicadores";
 import Alertas from "./pages/Alertas";
-import Intervencoes from "./pages/Intervencoes";
-import Modulo from "./pages/Modulo";
 
+import IntervencoesGestao from "./pages/IntervencoesGestao";
+
+import Modulo from "./pages/Modulo";
 import MainLayout from "./components/MainLayout";
 
 // ============================================
@@ -23,7 +23,7 @@ import MainLayout from "./components/MainLayout";
 
 function App() {
     // ==========================================
-    // SESSÃO AUTENTICADA EM MEMÓRIA
+    // SESSÃO EM MEMÓRIA
     // ==========================================
 
     const [sessao, setSessao] = useState(null);
@@ -65,7 +65,7 @@ function App() {
     }
 
     // ==========================================
-    // PÁGINA NÃO AUTENTICADA
+    // LOGIN NÃO REALIZADO
     // ==========================================
 
     if (!sessao) {
@@ -73,7 +73,7 @@ function App() {
     }
 
     // ==========================================
-    // DEFINIR CONTEÚDO
+    // CONTEÚDO AUTENTICADO
     // ==========================================
 
     let conteudo;
@@ -95,7 +95,7 @@ function App() {
     } else if (paginaAtual === "alertas") {
         conteudo = <Alertas token={sessao.accessToken} />;
     } else if (paginaAtual === "intervencoes") {
-        conteudo = <Intervencoes token={sessao.accessToken} />;
+        conteudo = <IntervencoesGestao token={sessao.accessToken} />;
     } else {
         conteudo = (
             <Modulo
@@ -106,7 +106,7 @@ function App() {
     }
 
     // ==========================================
-    // LAYOUT AUTENTICADO
+    // LAYOUT PRINCIPAL
     // ==========================================
 
     return (

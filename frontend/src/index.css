@@ -8209,3 +8209,269 @@ p {
     width: 100%;
   }
 }
+
+
+/* ==========================================
+   GESTÃO DE INTERVENÇÕES
+========================================== */
+
+.intervencoes-gestao {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.intervencoes-gestao-acoes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #e4e8ef;
+  border-radius: 14px;
+}
+
+.intervencoes-gestao-acoes h2 {
+  margin: 0 0 8px;
+  color: #173966;
+  font-size: 23px;
+}
+
+.intervencoes-gestao-acoes p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.intervencoes-gestao-botao {
+  padding: 12px 18px;
+  background: #173966;
+  color: #ffffff;
+  border: 1px solid #173966;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.intervencoes-gestao-botao:hover {
+  background: #22548c;
+}
+
+/* ==========================================
+   FORMULÁRIO
+========================================== */
+
+.cadastro-intervencao {
+  padding: 25px;
+  background: #ffffff;
+  border: 1px solid #e4e8ef;
+  border-radius: 14px;
+}
+
+.cadastro-intervencao-topo {
+  margin-bottom: 24px;
+}
+
+.cadastro-intervencao-topo h2 {
+  margin: 0 0 9px;
+  color: #173966;
+  font-size: 21px;
+}
+
+.cadastro-intervencao-topo p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.cadastro-intervencao-aluno {
+  max-width: 700px;
+  margin-bottom: 24px;
+}
+
+/* ==========================================
+   CAMPOS
+========================================== */
+
+.cadastro-intervencao-campos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.cadastro-intervencao-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.cadastro-intervencao-campo label {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cadastro-intervencao-campo input,
+.cadastro-intervencao-campo select,
+.cadastro-intervencao-campo textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  background: #ffffff;
+  color: #17253a;
+  border: 1px solid #d8e0eb;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 13px;
+}
+
+.cadastro-intervencao-campo input,
+.cadastro-intervencao-campo select {
+  min-height: 44px;
+}
+
+.cadastro-intervencao-campo textarea {
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.cadastro-intervencao-campo input:focus,
+.cadastro-intervencao-campo select:focus,
+.cadastro-intervencao-campo textarea:focus {
+  outline: 2px solid #2563a6;
+  outline-offset: 1px;
+}
+
+.cadastro-intervencao-campo input:disabled,
+.cadastro-intervencao-campo select:disabled,
+.cadastro-intervencao-campo textarea:disabled {
+  background: #f5f7fb;
+  cursor: not-allowed;
+}
+
+.cadastro-intervencao-descricao {
+  margin-top: 22px;
+}
+
+.cadastro-intervencao-descricao small {
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   MENSAGENS
+========================================== */
+
+.cadastro-intervencao-mensagem {
+  margin: 22px 0 0;
+  padding: 16px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.cadastro-intervencao-mensagem--erro {
+  background: #fff1f0;
+  color: #973737;
+  border-left: 4px solid #c15757;
+}
+
+.cadastro-intervencao-mensagem--sucesso {
+  background: #e4f5ed;
+  color: #18704c;
+  border-left: 4px solid #16816a;
+}
+
+/* ==========================================
+   BOTÕES
+========================================== */
+
+.cadastro-intervencao-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cadastro-intervencao-botao-salvar,
+.cadastro-intervencao-botao-limpar {
+  padding: 12px 18px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cadastro-intervencao-botao-salvar {
+  background: #173966;
+  color: #ffffff;
+  border: 1px solid #173966;
+}
+
+.cadastro-intervencao-botao-salvar:hover:not(:disabled) {
+  background: #22548c;
+}
+
+.cadastro-intervencao-botao-limpar {
+  background: #edf3fb;
+  color: #2563a6;
+  border: 1px solid #d6e3f3;
+}
+
+.cadastro-intervencao-botao-limpar:hover:not(:disabled) {
+  background: #dceafb;
+}
+
+.cadastro-intervencao-botao-salvar:disabled,
+.cadastro-intervencao-botao-limpar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cadastro-intervencao-observacao {
+  margin: 22px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 650px) {
+  .intervencoes-gestao-acoes {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .intervencoes-gestao-botao {
+    width: 100%;
+  }
+
+  .cadastro-intervencao {
+    padding: 20px;
+  }
+
+  .cadastro-intervencao-campos {
+    grid-template-columns: 1fr;
+  }
+
+  .cadastro-intervencao-acoes {
+    flex-direction: column;
+  }
+
+  .cadastro-intervencao-acoes button {
+    width: 100%;
+  }
+}
