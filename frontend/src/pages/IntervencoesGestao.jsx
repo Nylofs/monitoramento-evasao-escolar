@@ -6,8 +6,10 @@ import FormularioIntervencao from "../components/FormularioIntervencao";
 
 import FormularioEdicaoIntervencao from "../components/FormularioEdicaoIntervencao";
 
+import ExclusaoIntervencao from "../components/ExclusaoIntervencao";
+
 // ============================================
-// ETAPA 15 - PARTE 29
+// ETAPA 15 - PARTE 30
 // GESTÃO DE INTERVENÇÕES
 // ============================================
 
@@ -15,19 +17,19 @@ function IntervencoesGestao({ token }) {
     // ==========================================
     // MODO DO FORMULÁRIO
     //
-    // null | cadastro | edicao
+    // null | cadastro | edicao | exclusao
     // ==========================================
 
     const [modoFormulario, setModoFormulario] = useState(null);
 
     // ==========================================
-    // CONTROLE DA LISTAGEM
+    // VERSÃO DA LISTAGEM
     // ==========================================
 
     const [versaoLista, setVersaoLista] = useState(0);
 
     // ==========================================
-    // ABRIR OU FECHAR FORMULÁRIO
+    // ALTERNAR MODO
     // ==========================================
 
     function alterarModo(novoModo) {
@@ -59,15 +61,13 @@ function IntervencoesGestao({ token }) {
                     <h2>Gestão de intervenções</h2>
 
                     <p>
-                        Consulte, registre e atualize as ações de acompanhamento
-                        escolar.
+                        Consulte, registre, edite e exclua intervenções conforme
+                        suas permissões.
                     </p>
                 </div>
 
                 <div className="intervencoes-gestao-botoes">
-                    {/* ==================================
-              CADASTRO
-          ================================== */}
+                    {/* CADASTRO */}
 
                     <button
                         type="button"
@@ -81,9 +81,7 @@ function IntervencoesGestao({ token }) {
                             : "+ Registrar intervenção"}
                     </button>
 
-                    {/* ==================================
-              EDIÇÃO
-          ================================== */}
+                    {/* EDIÇÃO */}
 
                     <button
                         type="button"
@@ -99,6 +97,23 @@ function IntervencoesGestao({ token }) {
                             ? "Fechar edição"
                             : "Editar intervenção"}
                     </button>
+
+                    {/* EXCLUSÃO */}
+
+                    <button
+                        type="button"
+                        className={
+                            "intervencoes-gestao-botao " +
+                            "intervencoes-gestao-botao--perigo"
+                        }
+                        onClick={() => alterarModo("exclusao")}
+                        aria-expanded={modoFormulario === "exclusao"}
+                        aria-controls="intervencoes-gestao-formulario"
+                    >
+                        {modoFormulario === "exclusao"
+                            ? "Fechar exclusão"
+                            : "Excluir intervenção"}
+                    </button>
                 </div>
             </section>
 
@@ -108,7 +123,7 @@ function IntervencoesGestao({ token }) {
 
             {modoFormulario !== null && (
                 <div id="intervencoes-gestao-formulario">
-                    {/* CADASTRO EXISTENTE */}
+                    {/* CADASTRO */}
 
                     {modoFormulario === "cadastro" && (
                         <FormularioIntervencao
@@ -117,12 +132,21 @@ function IntervencoesGestao({ token }) {
                         />
                     )}
 
-                    {/* NOVA EDIÇÃO */}
+                    {/* EDIÇÃO */}
 
                     {modoFormulario === "edicao" && (
                         <FormularioEdicaoIntervencao
                             token={token}
                             onAtualizacaoRealizada={atualizarListagem}
+                        />
+                    )}
+
+                    {/* EXCLUSÃO */}
+
+                    {modoFormulario === "exclusao" && (
+                        <ExclusaoIntervencao
+                            token={token}
+                            onExclusaoRealizada={atualizarListagem}
                         />
                     )}
                 </div>

@@ -27,7 +27,8 @@ from app.controllers.intervencao_controller import (
     criar_intervencao_controller,
     listar_intervencoes_controller,
     buscar_intervencao_controller,
-    atualizar_intervencao_controller
+    atualizar_intervencao_controller,
+    excluir_intervencao_controller
 )
 
 
@@ -130,3 +131,24 @@ def atualizar_intervencao_route(
         db=db,
         usuario=usuario
     )
+
+
+# ============================================
+# DELETE - EXCLUIR INTERVENÇÃO
+# ============================================
+
+@router.delete(
+    "/{intervencao_id}",
+    status_code=status.HTTP_204_NO_CONTENT
+)
+def excluir_intervencao_route(
+    intervencao_id: int = Path(gt=0),
+    db: Session = Depends(get_db),
+    usuario: Usuario = Depends(obter_usuario_atual)
+):
+    excluir_intervencao_controller(
+        intervencao_id=intervencao_id,
+        db=db,
+        usuario=usuario
+    )
+    return None

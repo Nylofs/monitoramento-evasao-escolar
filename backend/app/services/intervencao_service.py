@@ -447,3 +447,38 @@ def atualizar_intervencao(
         ) from erro
 
     return intervencao
+
+
+# ============================================
+# DELETE - EXCLUIR INTERVENÇÃO
+# ============================================
+
+def excluir_intervencao(
+    db: Session,
+    intervencao_id: int,
+    usuario: Usuario
+) -> None:
+    """Exclui fisicamente uma intervenção autorizada.
+
+    Somente administradores podem excluir. Uma restrição
+    de integridade no banco impede a confirmação da transação.
+    Verifique cascatas ORM/FK antes de utilizar em dados reais.
+    """
+
+    exigir_administrador(usuario)
+
+    intervencao = buscar_intervencao(
+        db=db,
+        intervencao_id=intervencao_id,
+        usuario=usuario
+    )
+
+    try:
+        db.delete(intervencao)
+        db.commit()
+    except IntegrityError as erro:
+        db.rollback()
+        raise IntervencaoConflitoError(
+            "Não foi possível excluir a intervenção devido "
+            "a vínculos ou restrições de integridade."
+        ) from erro

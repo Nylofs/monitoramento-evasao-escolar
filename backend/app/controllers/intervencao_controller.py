@@ -16,6 +16,7 @@ from app.services.intervencao_service import (
     listar_intervencoes,
     buscar_intervencao,
     atualizar_intervencao,
+    excluir_intervencao,
     IntervencaoNaoEncontradaError,
     AlunoInvalidoIntervencaoError,
     IntervencaoPermissaoError,
@@ -183,5 +184,30 @@ def atualizar_intervencao_controller(
         IntervencaoPermissaoError,
         IntervencaoConflitoError,
         IntervencaoDataInvalidaError
+    ) as erro:
+        tratar_erro_intervencao(erro)
+
+
+# ============================================
+# DELETE - EXCLUIR INTERVENÇÃO
+# ============================================
+
+def excluir_intervencao_controller(
+    intervencao_id: int,
+    db: Session,
+    usuario: Usuario
+) -> None:
+    """Aciona o Service e converte erros de exclusão em HTTP."""
+
+    try:
+        excluir_intervencao(
+            db=db,
+            intervencao_id=intervencao_id,
+            usuario=usuario
+        )
+    except (
+        IntervencaoNaoEncontradaError,
+        IntervencaoPermissaoError,
+        IntervencaoConflitoError
     ) as erro:
         tratar_erro_intervencao(erro)
